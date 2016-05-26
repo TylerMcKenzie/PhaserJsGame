@@ -1,3 +1,26 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+app = angular.module('app', [
+  'templates',
+  'ngRoute',
+  'controllers'
+])
+
+app.config(['$routeProvider', '$locationProvider',
+  ($routeProvider, $locationProvider) -> 
+    $routeProvider
+      .when('/',
+        templateUrl: 'index.html'
+        controller: 'GameController'
+      )
+      .otherwise(
+        redirectTo: (current, path, search) ->
+          '/' + search.goto if search.goto
+          '/'
+      )
+    $locationProvider.html5Mode(true)
+])
+
+controllers = angular.module('controllers', [])
+controllers.controller("GameController", ['$scope', 
+  ($scope) ->
+
+])
